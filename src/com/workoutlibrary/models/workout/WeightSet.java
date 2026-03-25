@@ -1,13 +1,11 @@
 package com.workoutlibrary.models.workout;
 
-
 import java.util.HashMap;
-
 import java.util.Map;
 
 /**
- * A PerformedSet consists of an Exercise and Repetitions (non-optional) with optional inclusion of Reps in Reserve (RIR) and 
- * Weight (Which can be left at zero for bodyweight exercises). Data for a given set is kept in a HashMap, with individual data
+ * A WeightSet consists of an Exercise and Repetitions (non-optional) with optional inclusion of Reps in Reserve (RIR) and 
+ * Weight (Which can be left at zero for bodyweight exercises). Data for a given set can be retrieved together in a HashMap, with individual data
  * still able to be retrieved by getters. A fuller experience of this API is achieved by including as many optional fields
  * as possible.
  * @apiNote - keys: "exercise", "weight", "reps", "rir"
@@ -15,40 +13,28 @@ import java.util.Map;
  * @throws IllegalArgumentException if reps is not set to a value of 1 or more
  * @author Eoghain Magee
  */
-public final class PerformedSet {
+public final class WeightSet extends ExerciseSet {
 	
-	private Map<String, Object> setData = new HashMap<>();
-	private final Exercise exercise;
+	
 	private final double weight;
 	private final int reps;
 	private final Integer repsInReserve;
 	
 	
-	private PerformedSet(Builder b) {
-		this.exercise = b.exercise;
+	private WeightSet(Builder b) {
+		super(b);
 		this.weight = b.weight;
 		this.reps = b.reps;
 		this.repsInReserve = b.repsInReserve;
-		setData.put("exercise", exercise);
-		setData.put("weight", weight);
-		setData.put("reps", reps);
-		setData.put("rir", repsInReserve);
+	
 	}
 	
 	
-	public static class Builder {
-		private Exercise exercise;
+	public static class Builder extends ExerciseSet.Builder<Builder> {
 		private double weight;
 		private int reps;
-		private int repsInReserve;
+		private Integer repsInReserve;
 		
-		/**
-		 * Instantiate PerformedSet Builder
-		 * @param exercise - instance of Exercise, cannot be null
-		 */
-		public Builder(Exercise exercise) {
-			this.exercise = exercise;
-		}
 		
 		/**
 		 * Add weight to given set via Builder
@@ -65,7 +51,7 @@ public final class PerformedSet {
 		 * @param reps
 		 * @return instance of Builder class
 		 */
-		public Builder reps(int reps) {
+		public Builder reps(Integer reps) {
 			this.reps = reps;
 			return this;
 		}
@@ -75,7 +61,7 @@ public final class PerformedSet {
 		 * @param repsInReserve
 		 * @return instance of Builder class
 		 */
-		public Builder repsInReverse(int repsInReserve) {
+		public Builder repsInReserve(int repsInReserve) {
 			this.repsInReserve = repsInReserve;
 			return this;
 		}
@@ -86,40 +72,64 @@ public final class PerformedSet {
 		 * @throws IllegalArgumentException if weight or repsInReserve are less than 0, or if reps is less than 1.
 		 * @throws NullPointerException if exercise is null
 		 */
-		public PerformedSet build() {
-			PerformedSetValidation.validateExercise(exercise);
-			PerformedSetValidation.validateNonNegative(weight);
-			PerformedSetValidation.validatePositive(reps);
-			PerformedSetValidation.validateNonNegative(repsInReserve);
-			return new PerformedSet(this);
+		public WeightSet build() {
+			ExerciseSetValidation.validateNonNegative(weight);
+			ExerciseSetValidation.validatePositive(reps);
+			if (repsInReserve != null) {
+				ExerciseSetValidation.validateNonNegative(repsInReserve);
+			}
+			return new WeightSet(this);
+		}
+
+		@Override
+		protected Builder self() {
+			// TODO Auto-generated method stub
+			return this;
 		}
 
 	}
-
-
-	public Exercise getExercise() {
-		return exercise;
+	
+	/**
+	 * Returns a map which contains the exercise, reps, weight, and reps in reserve of the set
+	 * @return Map<String, Object>
+	 */
+	public Map<String, Object> toMap() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("exercise", getExercise());
+		map.put("reps", reps);
+		map.put("weight", weight);
+		map.put("rir", repsInReserve);
+		return map;
 	}
-
-
+	
+	/**
+	 * Retrieve the weight used in the set
+	 * @return
+	 */
 	public double getWeight() {
 		return weight;
 	}
 
-
+	/**
+	 * Retrieve the number of reps performed in the set
+	 * @return
+	 */
 	public int getReps() {
 		return reps;
 	}
 
-
+	/**
+	 * Retrieve the number of reps in reserve when the set ended
+	 * @return Integer (reps in reserve, can be null/not set)
+	 */
 	public Integer getRepsInReserve() {
 		return repsInReserve;
 	}
 	
-	public Map<String, Object> getSetData() { 
-		return Map.copyOf(setData);
-	}
-	
+	/**
+	 * Retrieve total volume from the set via multiplying reps and weight
+	 * @return
+	 */
 	public double getTotalVolume() {
 		return weight * reps;
 	}

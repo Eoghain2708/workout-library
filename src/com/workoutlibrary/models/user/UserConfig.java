@@ -4,8 +4,9 @@ import java.util.Objects;
 
 /**
  * The UserConfig consists of bodyweight and weight preference in terms of kilograms and pounds (lbs) which can be used when
- * displaying their performance throughout the workout - their weight preference is saved so as to make for easy converting
- * in other parts of the API
+ * displaying their performance throughout the workout - their weight preference is held so as to make for easy converting
+ * in other parts of the API. This class is immutable - a user wanting to change their settings creates a new UserConfig with only the weightPreferences 
+ * attribute changed.
  */
 public final class UserConfig {
 
@@ -73,9 +74,10 @@ public final class UserConfig {
 	
 	
 	/**
-	 * 
-	 * @param val
-	 * @return
+	 * Returns a new UserConfig with the current bodyWeight and weightPreference changed to val.
+	 * @param WeightMetrics val
+	 * @return new UserConfig
+	 * @throws NullPointerException if val is null
 	 */
 	public UserConfig changeWeightPreference(WeightMetrics val) {
 		Objects.requireNonNull(val);

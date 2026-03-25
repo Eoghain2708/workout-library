@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import com.workoutlibrary.models.user.UserConfig.WeightMetrics;
 
-public final class ValidateUserConfig {
+final class ValidateUserConfig {
 	private ValidateUserConfig() {}
 	
 	protected static void validateBodyWeight(double val, UserConfig uc) {
