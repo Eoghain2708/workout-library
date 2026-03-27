@@ -33,11 +33,12 @@ public class StrengthEstimator {
 	 * both to avoid two methods with potentially unclear method names.
 	 * It is worth noting that including reps in reserve here would skew/complicate things greatly - RIR is assumed to be LOW for these
 	 * formulae and so is ignored here.
+	 * @apiNote this is calculated, by default, in kilograms. To predict one-rep-max in lbs, call .toLbs() on the result of this method.
 	 * @param ws
 	 * @return double One-rep-max estimate formatted to two decimal places
 	 */
 	protected static double predictOneRepMax(WeightSet ws) {
-		double w = ws.getWeight();
+		double w = ws.getWeight().toKg();
 		double r = (double) ws.getReps();
 	
 		

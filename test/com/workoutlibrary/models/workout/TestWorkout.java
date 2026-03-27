@@ -16,6 +16,7 @@ import com.workoutlibrary.models.workout.sets.CardioSet;
 import com.workoutlibrary.models.workout.sets.Exercise;
 import com.workoutlibrary.models.workout.sets.ExerciseSet;
 import com.workoutlibrary.models.workout.sets.WeightSet;
+import com.workoutlibrary.weightconversion.Weight;
 
 class TestWorkout {
 	WeightSet ws1;
@@ -32,13 +33,13 @@ class TestWorkout {
 		ws1 = new WeightSet.Builder()
 				.exercise(Exercise.create("pullup"))
 				.reps(10)
-				.weight(12)
+				.weight(Weight.ofKg(12))
 				.build();
 		
 		ws2 = new WeightSet.Builder()
 				.exercise(Exercise.create("pushup"))
 				.reps(12)
-				.weight(20)
+				.weight(Weight.ofKg(12))
 				.build();
 		
 		cs1 = new CardioSet.Builder()
@@ -99,11 +100,11 @@ class TestWorkout {
 	@Test
 	void testGetVolumesPerExercise() {
 		Map<Exercise, Double> map = new HashMap<>();
-		map.put(ws1.getExercise(), ws1.getTotalVolume());
-		map.put(ws2.getExercise(), ws2.getTotalVolume());
+		map.put(ws1.getExercise(), ws1.getTotalVolumeKgs());
+		map.put(ws2.getExercise(), ws2.getTotalVolumeKgs());
 	
 		
-		assertEquals(map, test.getVolumesPerExercise());
+		assertEquals(map, test.getVolumesPerExerciseKgs());
 	}
 
 }

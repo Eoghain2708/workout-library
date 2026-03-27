@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import com.workoutlibrary.models.workout.sets.Exercise;
 import com.workoutlibrary.models.workout.sets.WeightSet;
+import com.workoutlibrary.weightconversion.Weight;
 
 class TestWeightSet {
 	
@@ -23,8 +24,7 @@ class TestWeightSet {
 	Integer validRepsInReserve;
 	Integer invalidRepsInReserveNegative;
 	
-	double validWeight;
-	double invalidWeightNegative;
+	Weight validWeight;
 	
 	WeightSet test;
 
@@ -40,8 +40,8 @@ class TestWeightSet {
 		invalidRepsNegative = -1;
 		validRepsInReserve = 5;
 		invalidRepsInReserveNegative = -2;
-		validWeight = 100;
-		invalidWeightNegative = -1;
+		validWeight = Weight.ofKg(100);
+	
 		
 	
 		test = new WeightSet.Builder()
@@ -78,7 +78,7 @@ class TestWeightSet {
 	@Test
 	void testToMap() {
 		int validReps2 = 10;
-		var ex2 = Exercise.create("pullup");
+		var ex2 = Exercise.create("curl");
 		WeightSet testForMap = new WeightSet.Builder()
 				.weight(validWeight)
 				.reps(validReps2)
@@ -89,9 +89,9 @@ class TestWeightSet {
 		Map<String, Object> testMap = new HashMap<>();
 		testMap.put("exercise", ex2);
 		testMap.put("reps", validReps2); // 10 reps
-		testMap.put("weight", validWeight); // 100 weight
+		testMap.put("weight", validWeight.toKg()); // 100 weight
 		testMap.put("rir", validRepsInReserve);
-		assertEquals(testMap, testForMap.toMap());
+		assertEquals(testMap, testForMap.toMapKgs());
 		
 	}
 
@@ -111,8 +111,13 @@ class TestWeightSet {
 	}
 
 	@Test
-	void testGetTotalVolume() {
-		assertEquals((validReps * validWeight), test.getTotalVolume());
+	void testGetTotalVolumeKgs() {
+		assertEquals((validReps * validWeight.toKg()), test.getTotalVolumeKgs());
+	}
+	
+	@Test
+	void testGetTotalVolumeLbs() {
+		assertEquals((validReps * validWeight.toLbs()), test.getTotalVolumeLbs());
 	}
 
 	

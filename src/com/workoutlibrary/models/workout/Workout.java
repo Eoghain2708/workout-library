@@ -55,10 +55,23 @@ public final class Workout {
 				.toList();	
 	}
 	
-	
-	public Map<Exercise, Double> getVolumesPerExercise() {
-		return WorkoutAnalyser.getVolumesPerExercise(getAllWeightSets());
+	/**
+	 * Gets volumes per exercise in kilograms by calling 
+	 * @return
+	 */
+	public Map<Exercise, Double> getVolumesPerExerciseKgs() {
+		return WorkoutAnalyser.getVolumesPerExerciseKgs(getAllWeightSets());
 	}
+	
+	/**
+	 * Gets volumes per exercise in kilograms by calling 
+	 * @return
+	 */
+	public Map<Exercise, Double> getVolumesPerExerciseLbs() {
+		return WorkoutAnalyser.getVolumesPerExerciseLbs(getAllWeightSets());
+	}
+	
+	
 	
 	
 	

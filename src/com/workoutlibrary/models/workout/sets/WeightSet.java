@@ -2,10 +2,13 @@ package com.workoutlibrary.models.workout.sets;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+
+import com.workoutlibrary.weightconversion.Weight;
 
 /**
- * A WeightSet consists of an Exercise and Repetitions (non-optional) with optional inclusion of Reps in Reserve (RIR) and 
- * Weight (Which can be left at zero for bodyweight exercises). Data for a given set can be retrieved together in a HashMap, with individual data
+ * A WeightSet consists of an Exercise, Reptitions and Weight, with optional inclusion of Reps in Reserve (RIR).
+ * Data for a given set can be retrieved together in a HashMap, with individual data
  * still able to be retrieved by getters. A fuller experience of this API is achieved by including as many optional fields
  * as possible.
  * @apiNote - keys: "exercise", "weight", "reps", "rir"
@@ -16,13 +19,14 @@ import java.util.Map;
 public final class WeightSet extends ExerciseSet {
 	
 	
-	private final double weight;
+	private final Weight weight;
 	private final int reps;
 	private final Integer repsInReserve;
 	
 	
 	private WeightSet(Builder b) {
 		super(b);
+		Objects.requireNonNull(b.weight);
 		this.weight = b.weight;
 		this.reps = b.reps;
 		this.repsInReserve = b.repsInReserve;
@@ -30,7 +34,7 @@ public final class WeightSet extends ExerciseSet {
 	
 	
 	public static class Builder extends ExerciseSet.Builder<Builder> {
-		private double weight;
+		private Weight weight;
 		private int reps;
 		private Integer repsInReserve;
 		
@@ -40,7 +44,7 @@ public final class WeightSet extends ExerciseSet {
 		 * @param weight
 		 * @return instance of Builder class
 		 */
-		public Builder weight(double weight) {
+		public Builder weight(Weight weight) {
 			this.weight = weight;
 			return this;
 		}
@@ -72,7 +76,6 @@ public final class WeightSet extends ExerciseSet {
 		 * @throws NullPointerException if exercise is null
 		 */
 		public WeightSet build() {
-			ExerciseSetValidation.validateNonNegative(weight);
 			ExerciseSetValidation.validatePositive(reps);
 			if (repsInReserve != null) {
 				ExerciseSetValidation.validateNonNegative(repsInReserve);
@@ -92,11 +95,24 @@ public final class WeightSet extends ExerciseSet {
 	 * Returns a map which contains the exercise, reps, weight, and reps in reserve of the set
 	 * @return Map<String, Object>
 	 */
-	public Map<String, Object> toMap() {
+	public Map<String, Object> toMapKgs() {
 		Map<String, Object> map = new HashMap<>();
 		map.put("exercise", getExercise());
 		map.put("reps", reps);
-		map.put("weight", weight);
+		map.put("weight", weight.toKg());
+		map.put("rir", repsInReserve);
+		return map;
+	}
+	
+	/**
+	 * Returns a map which contains the exercise, reps, weight, and reps in reserve of the set
+	 * @return Map<String, Object>
+	 */
+	public Map<String, Object> toMapLbs() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("exercise", getExercise());
+		map.put("reps", reps);
+		map.put("weight", weight.toLbs());
 		map.put("rir", repsInReserve);
 		return map;
 	}
@@ -105,7 +121,7 @@ public final class WeightSet extends ExerciseSet {
 	 * Retrieve the weight used in the set
 	 * @return
 	 */
-	public double getWeight() {
+	public Weight getWeight() {
 		return weight;
 	}
 
@@ -129,11 +145,19 @@ public final class WeightSet extends ExerciseSet {
 	 * Retrieve total volume from the set via multiplying reps and weight
 	 * @return double 
 	 */
-	public double getTotalVolume() {
-		return weight * reps;
+	public double getTotalVolumeKgs() {
+		return reps * weight.toKg();
 	}
 	
+	/**
+	 * Retrieve total volume from the set via multiplying reps and weight
+	 * @return double 
+	 */
+	public double getTotalVolumeLbs() {
+		return reps * weight.toLbs();
+	}
 	
+
 	/**
 	 * This method applies to a WeightSet and, using the weight and reps, applies the Epley formula and Brzycki formula to calculate
 	 * the user's one-rep maximum potential strength based off the weight they are currently able to do for n number of reps. 
