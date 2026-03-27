@@ -1,4 +1,4 @@
-package com.workoutlibrary.models.workout;
+package com.workoutlibrary.models.workout.sets;
 
 import java.util.HashMap;
 

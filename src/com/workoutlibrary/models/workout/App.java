@@ -2,6 +2,10 @@ package com.workoutlibrary.models.workout;
 
 import java.util.List;
 
+import com.workoutlibrary.models.workout.sets.Exercise;
+import com.workoutlibrary.models.workout.sets.StrengthEstimator;
+import com.workoutlibrary.models.workout.sets.WeightSet;
+
 public class App {
 	public static void main(String[] args) {
 		WeightSet ws = new WeightSet.Builder().exercise(Exercise.create("Bench Press")).reps(15).weight(60).repsInReserve(2).build();
@@ -28,5 +32,14 @@ public class App {
 		Workout workout = Workout.of(List.of(ws, ws2, ws3, ws4, ws5, ws6));
 		var res = workout.getVolumesPerExercise();
 		System.out.println(res.toString());
+		
+		var ws7 = new WeightSet.Builder()
+				.exercise(Exercise.create("bench press"))
+				.reps(7)
+				.weight(90)
+				.build();
+		double oneRepMax = (ws7.predictOneRepMax());
+		
+		System.out.println(StrengthEstimator.getWeightFromOneRepMax(oneRepMax, 5));
 	}
 }

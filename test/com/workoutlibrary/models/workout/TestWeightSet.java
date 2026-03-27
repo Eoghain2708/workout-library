@@ -2,8 +2,14 @@ package com.workoutlibrary.models.workout;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import com.workoutlibrary.models.workout.sets.Exercise;
+import com.workoutlibrary.models.workout.sets.WeightSet;
 
 class TestWeightSet {
 	
@@ -22,28 +28,30 @@ class TestWeightSet {
 	
 	WeightSet test;
 
+	
+	
+
 	@BeforeEach
 	void setUp() throws Exception {
 		exerciseName = "Bench Press";
 		ex = Exercise.create(exerciseName);
-		
 		validReps = 5;
 		invalidRepsZero = 0;
 		invalidRepsNegative = -1;
-		
 		validRepsInReserve = 5;
 		invalidRepsInReserveNegative = -2;
-		
 		validWeight = 100;
 		invalidWeightNegative = -1;
 		
-		
+	
 		test = new WeightSet.Builder()
 				.weight(validWeight)
 				.reps(validReps)
 				.repsInReserve(validRepsInReserve)
 				.exercise(ex)
 				.build();
+		
+
 	}
 	
 	@Test
@@ -69,34 +77,49 @@ class TestWeightSet {
 
 	@Test
 	void testToMap() {
-		fail("Not yet implemented");
+		int validReps2 = 10;
+		var ex2 = Exercise.create("pullup");
+		WeightSet testForMap = new WeightSet.Builder()
+				.weight(validWeight)
+				.reps(validReps2)
+				.repsInReserve(validRepsInReserve)
+				.exercise(ex2)
+				.build();
+		
+		Map<String, Object> testMap = new HashMap<>();
+		testMap.put("exercise", ex2);
+		testMap.put("reps", validReps2); // 10 reps
+		testMap.put("weight", validWeight); // 100 weight
+		testMap.put("rir", validRepsInReserve);
+		assertEquals(testMap, testForMap.toMap());
+		
 	}
 
 	@Test
 	void testGetWeight() {
-		fail("Not yet implemented");
+		assertEquals(validWeight, test.getWeight());
 	}
 
 	@Test
 	void testGetReps() {
-		fail("Not yet implemented");
+		assertEquals(validReps, test.getReps());
 	}
 
 	@Test
 	void testGetRepsInReserve() {
-		fail("Not yet implemented");
+		assertEquals(validRepsInReserve, test.getRepsInReserve());
 	}
 
 	@Test
 	void testGetTotalVolume() {
-		fail("Not yet implemented");
+		assertEquals((validReps * validWeight), test.getTotalVolume());
 	}
 
 	
 
 	@Test
 	void testGetExercise() {
-		fail("Not yet implemented");
+		assertEquals(ex, test.getExercise());
 	}
 
 }

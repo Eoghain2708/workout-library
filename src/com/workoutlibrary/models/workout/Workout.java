@@ -3,20 +3,33 @@ package com.workoutlibrary.models.workout;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+
+import com.workoutlibrary.models.workout.sets.CardioSet;
+import com.workoutlibrary.models.workout.sets.Exercise;
+import com.workoutlibrary.models.workout.sets.ExerciseSet;
+import com.workoutlibrary.models.workout.sets.WeightSet;
 
 public final class Workout {
 	private List<ExerciseSet> listOfSets = new LinkedList<>();
 	
 	private Workout(List<ExerciseSet> sets) {
 		for (var set : sets) {
-			if (set == null) {
-				continue;
+			if (set != null) {
+				listOfSets.add(set);
 			}
-			listOfSets.add(set);
 		}
 	}
 	
+	/**
+	 * Creates a new Workout from a list of ExerciseSets given as a paramter. If any of the given ExerciseSets is null, it will skip
+	 * that ExerciseSet and continue to collect those remaining.
+	 * @param sets
+	 * @return new Workout consisting of each ExerciseSet in given List
+	 * @throws NullPointerException if sets is null or if sets contains multiple nulls and no valid ExerciseSets
+	 */
 	public static Workout of(List<ExerciseSet> sets) {
+		Objects.requireNonNull(sets);
 		return new Workout(sets);
 	}
 	
@@ -46,6 +59,8 @@ public final class Workout {
 	public Map<Exercise, Double> getVolumesPerExercise() {
 		return WorkoutAnalyser.getVolumesPerExercise(getAllWeightSets());
 	}
+	
+	
 	
 	
 	

@@ -1,4 +1,4 @@
-package com.workoutlibrary.models.workout;
+package com.workoutlibrary.models.workout.sets;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +26,6 @@ public final class WeightSet extends ExerciseSet {
 		this.weight = b.weight;
 		this.reps = b.reps;
 		this.repsInReserve = b.repsInReserve;
-	
 	}
 	
 	
@@ -128,11 +127,30 @@ public final class WeightSet extends ExerciseSet {
 	
 	/**
 	 * Retrieve total volume from the set via multiplying reps and weight
-	 * @return
+	 * @return double 
 	 */
 	public double getTotalVolume() {
 		return weight * reps;
 	}
+	
+	
+	/**
+	 * This method applies to a WeightSet and, using the weight and reps, applies the Epley formula and Brzycki formula to calculate
+	 * the user's one-rep maximum potential strength based off the weight they are currently able to do for n number of reps. 
+	 * Epley is often cited as more optimistic whilst Brzycki is cited as conservative - this method therefore averages the results of 
+	 * both to avoid two methods with potentially unclear method names.
+	 * It is worth noting that including reps in reserve here would skew/complicate things greatly - RIR is assumed to be LOW for these
+	 * formulae and so is ignored here.
+	 * @param ws
+	 * @return double One-rep-max estimate formatted to two decimal places
+	 */
+	public double predictOneRepMax() {
+		return StrengthEstimator.predictOneRepMax(this);
+	}
+	
+	
+	
+	
 	
 	
 }
