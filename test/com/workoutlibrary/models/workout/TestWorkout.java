@@ -2,6 +2,7 @@ package com.workoutlibrary.models.workout;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -42,12 +43,12 @@ class TestWorkout {
 		
 		cs1 = new CardioSet.Builder()
 				.exercise(Exercise.create("Running"))
-				.duration(30)
+				.duration(Duration.ofMinutes(25))
 				.build();
 		
 		cs2 = new CardioSet.Builder()
 				.exercise(Exercise.create("HIIT"))
-				.duration(20)
+				.duration(Duration.ofMinutes(20))
 				.build();
 		
 		test = Workout.of(List.of(ws1, ws2, cs1, cs2));

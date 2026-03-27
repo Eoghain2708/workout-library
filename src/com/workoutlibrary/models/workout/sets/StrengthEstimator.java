@@ -8,10 +8,7 @@ import java.text.DecimalFormat;
 public class StrengthEstimator {
 	
 	static DecimalFormat df = new DecimalFormat("#.##");
-	
-	
-	
-	
+
 	/**
 	 * A standalone method that takes in a given number of reps and weight and returns the user's approximate one rep maximum 
 	 * which is calculated by applying the Epley formula and Brzycki formula and averaging the difference between the two

@@ -1,5 +1,7 @@
 package com.workoutlibrary.models.workout.sets;
 
+import java.time.Duration;
+import java.util.Objects;
 
 /**
  * A CardioSet takes in an Exercise and duration (in minutes) both of which are non optional.
@@ -7,25 +9,25 @@ package com.workoutlibrary.models.workout.sets;
  */
 public class CardioSet extends ExerciseSet {
 	
-	private final double duration;
+	private final Duration duration;
 	
 	private CardioSet(Builder b) {
 		super(b);
-		ExerciseSetValidation.validatePositive(b.duration);
 		this.duration = b.duration;
 	}
 	
 	public static class Builder extends ExerciseSet.Builder<Builder> {
 		
-		private double duration;
+		private Duration duration;
 		
 		/**
-		 * Add a duration to the CardioSet (in minutes)
+		 * Add a duration to the CardioSet 
 		 * @param val
 		 * @return
 		 */
-		public Builder duration(double val) {
-			this.duration = val;
+		public Builder duration(Duration val) {
+			
+			this.duration = Objects.requireNonNull(val);
 			return this;
 		}
 		
@@ -37,8 +39,7 @@ public class CardioSet extends ExerciseSet {
 		/**
 		 * 
 		 * @return new CardioSet with given Exercise and duration
-		 * @throws IllegalArgumentException if duration <= 0
-		 * @throws NullPointerException if Exercise is null
+		 * @throws NullPointerException if Exercise is null or Duration is null
 		 */
 		@Override
 		public CardioSet build() {
@@ -50,15 +51,9 @@ public class CardioSet extends ExerciseSet {
 	 * Retrieve duration of CardioSet
 	 * @return double duration
 	 */
-	public double getDuration() {
+	public Duration getDuration() {
 		return duration;
 	}
 	
-	/**
-	 * Retrieve duration of CardioSet in seconds
-	 * @return double duration * 60
-	 */
-	public double durationToSeconds() {
-		return duration * 60;
-	}
+	
 }

@@ -2,6 +2,8 @@ package com.workoutlibrary.models.workout;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.Duration;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,10 +18,8 @@ class TestCardioSet {
 	
 	Exercise ex;
 	
-	int validDuration;
-	int invalidDurationZero;
-	int invalidDurationNegative;
-	
+	Duration validDuration;
+
 	
 
 	@BeforeEach
@@ -29,11 +29,10 @@ class TestCardioSet {
 		
 		ex = Exercise.create(validExerciseName);
 		
-		validDuration = 15;
-		invalidDurationZero = 0;
-		invalidDurationNegative = -15;
+		validDuration = Duration.ofMinutes(30);
+	
 		
-		test = new CardioSet.Builder().duration(validDuration)
+		test = new CardioSet.Builder().duration(Duration.ofMinutes(30))
 				.exercise(ex)
 				.build();
 				
@@ -59,19 +58,14 @@ class TestCardioSet {
 	
 	@Test
 	void rejectsInvalidDuration() {
-		assertThrows(IllegalArgumentException.class, () -> {
+		assertThrows(NullPointerException.class, () -> {
 			new CardioSet.Builder()
 			.exercise(ex)
-			.duration(invalidDurationZero)
+			.duration(null)
 			.build();
 		});
 		
-		assertThrows(IllegalArgumentException.class, () -> {
-			new CardioSet.Builder()
-			.exercise(ex)
-			.duration(invalidDurationNegative)
-			.build();
-		});
+	
 	}
 
 	@Test
@@ -79,10 +73,6 @@ class TestCardioSet {
 		assertEquals(validDuration, test.getDuration());
 	}
 
-	@Test
-	void testDurationToSeconds() {
-		assertEquals(900, test.durationToSeconds());
-	}
 
 	@Test
 	void testGetExercise() {
