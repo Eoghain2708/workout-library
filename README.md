@@ -83,11 +83,11 @@ pass that in instead.
 
 ***
 #### User
-User only serves one purpose in this library, and that is to have a bodyweight. At current, the only use for the User object is that its weight be passed into exercises if chosen.
+User only serves one purpose in this library, and that is to have a bodyweight. At current, the only use for this bodyweight attribute is that it be passed into exercises if chosen.
 ```
 User user = User.ofBodyWeight(Weight.ofKg(80));
 WeightSet ws = new WeightSet.Builder()
-              .exercise(Exercise.create("barbell curl")
+              .exercise(Exercise.create("pushup")
               .reps(12)
               .weight(user.getBodyWeight())
               .build();
