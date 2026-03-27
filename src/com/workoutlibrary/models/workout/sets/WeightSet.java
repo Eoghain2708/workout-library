@@ -26,7 +26,7 @@ public final class WeightSet extends ExerciseSet {
 	
 	private WeightSet(Builder b) {
 		super(b);
-		Objects.requireNonNull(b.weight);
+		if (b.weight == null) { b.weight = Weight.ofKg(0); }
 		this.weight = b.weight;
 		this.reps = b.reps;
 		this.repsInReserve = b.repsInReserve;
