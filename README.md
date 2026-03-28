@@ -4,6 +4,20 @@
 the user with useful information regarding their performance and potential. This library is a work in progress and, while its core is unlikely to change, will hopefully continue to expand in terms of options
 and utility.
 
+## Installation
+Add the following into your pom.xml
+```
+<dependency>
+  <groupId>io.github.Eoghain2708</groupId>
+  <artifactId>workout-library</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+</dependency>
+```
+then run:
+```
+mvn install
+```
+
 ## Usage
 This is a simple library to use, centred around taking user input and using Builders to promote clean, idiomatic object-creation along with optional attributes. The library is focussed on providing flexibility
 to the client in terms of the complexity of their own application, trying to force as little as possible whilst presenting the greatest number of options, which will again, continue to increase (as I think of them :))
@@ -106,7 +120,7 @@ The class method is protected in the StrengthEstimator class, and takes in a Wei
 WeightSet ws = new WeightSet.Builder()
               .exercise(Exercise.create("barbell curl")
               .reps(12)
-              .weight(user.getBodyWeight())
+              .weight(Weight.ofKg(15)
               .build();
 double oneRepMax = ws.predictOneRepMax();
 ```
@@ -125,4 +139,34 @@ the client's/user's preferences.
 This method takes a weight parameter and a target reps parameter. The *weight* is said to be the user's one rep maximum for an unspecified exercise, and the *target reps* is how many repetitions they want to aim for in a given set. Different 
 rep-ranges are preferred for different goals and this method aims to find the weight which would make *n* number of reps challenging, so that the user will achieve sufficient intensity in their desired rep-range. It uses another Epley formula:
 ** Weight = 1RM / (1 + 0.03333 * targetRepititions)**
+***
+### Workout
+Workouts are objects that take a List of either type of ExerciseSet, or both. The list of ExerciseSets itself cannot be null, but the ExerciseSets within the parameter List can be null, *as long as there is at least **one** non-null ExerciseSet.*
+A Workout can be created with the *of()* method:
+```
+WeightSet ws = new WeightSet.Builder()
+              .exercise(Exercise.create("barbell curl")
+              .reps(12)
+              .weight(Weight.ofKg(15)
+              .build();
+
+WeightSet ws2 = new WeightSet.Builder()
+              .exercise(Exercise.create("pushup")
+              .reps(12)
+              .weight(user.getBodyWeight())
+              .build();
+Workout workout = Workout.of(List.of(ws, ws2));
+```
+All CardioSets can be gathered from the Workout via the *getAllCardioSets()* method called on a given Workout, and all WeightSets can be gathered, predictably, by calling the *getAllWeightSets()* method. *GetAllSets()* returns a list of every 
+ExerciseSet in the Workout.
+
+**getVolumesPerExercise()**
+There is no actual *getVolumesPerExercise()* method, but instead *getVolumesPerExerciseKgs()* and *getVolumesPerExerciseLbs()*. Both methods return a HashMap of each Exercise and the total amount of volume lifted in that Exercise in a given workout.
+The volume of a given set is calculated by *reps * weight,* and, if multiple sets are carried out of the same exercise, the total volume is the volume of each set summed together. These methods only apply to WeightSets, but they are perfectly
+valid to call on Workouts which contain CardioSets, as these are filtered out using the *getAllWeightSets()* method before calculating.
+
+
+
+
+
 
