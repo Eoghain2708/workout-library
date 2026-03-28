@@ -14,6 +14,13 @@
     <scope>test</scope>
 </dependency>
     </dependencies>
+    <distributionManagement>
+    <repository>
+        <id>github</id>
+        <name>GitHub Packages</name>
+        <url>https://maven.pkg.github.com/Eoghain2708/workout-library</url>
+    </repository>
+</distributionManagement>
   <build>
     <plugins>
       <plugin>

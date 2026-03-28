@@ -5,8 +5,11 @@ import java.text.DecimalFormat;
 
 
 
+
+
 public class StrengthEstimator {
 	
+
 	static DecimalFormat df = new DecimalFormat("#.##");
 
 	/**
@@ -68,5 +71,7 @@ public class StrengthEstimator {
 		ExerciseSetValidation.validatePositive(targetReps);
 		return Double.parseDouble(df.format(oneRepMax / (1 + (0.03333 * (double) targetReps))));
 	}
+	
+	
 	
 }

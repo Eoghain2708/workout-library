@@ -71,6 +71,8 @@ public final class Workout {
 		return WorkoutAnalyser.getVolumesPerExerciseLbs(getAllWeightSets());
 	}
 	
+
+	
 	
 	
 	

@@ -9,6 +9,7 @@ import com.workoutlibrary.models.workout.sets.Exercise;
 import com.workoutlibrary.models.workout.sets.WeightSet;
 
 public class WorkoutAnalyser {
+	
 	static DecimalFormat df = new DecimalFormat("#.##");
 	
 	protected static Map<Exercise, Double> getVolumesPerExerciseKgs(List<WeightSet> sets) {
@@ -32,4 +33,6 @@ public class WorkoutAnalyser {
 		
 		return map;
 	}
+	
+	
 }

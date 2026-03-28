@@ -76,9 +76,7 @@ public final class WeightSet extends ExerciseSet {
 		 */
 		public WeightSet build() {
 			ExerciseSetValidation.validatePositive(reps);
-			if (repsInReserve != null) {
-				ExerciseSetValidation.validateNonNegative(repsInReserve);
-			}
+			ExerciseSetValidation.validateRIR(repsInReserve);
 			return new WeightSet(this);
 		}
 
@@ -171,5 +169,13 @@ public final class WeightSet extends ExerciseSet {
 		return StrengthEstimator.predictOneRepMax(this);
 	}
 	
+	
+	/**
+	 * Returns the RPE of a WeightSet - RIR (reps in reserve) and RPE (rate of perceived exertion) are roughly inverse
+	 * @return Integer RPE of a given WeightSet
+	 */
+	public Integer getRPE() {
+		return RIRtoRPE.toRPE(repsInReserve);
+	}
 	
 }

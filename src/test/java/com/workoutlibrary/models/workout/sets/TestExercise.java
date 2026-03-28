@@ -1,12 +1,10 @@
-package com.workoutlibrary.models.workout;
+package com.workoutlibrary.models.workout.sets;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import com.workoutlibrary.models.workout.sets.Exercise;
 
 class TestExercise {
 	String validName;
