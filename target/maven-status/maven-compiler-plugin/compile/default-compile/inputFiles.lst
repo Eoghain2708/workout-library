@@ -1,0 +1,11 @@
+/home/eoghainmagee/libraries/com.workoutlibrary/src/main/java/com/workoutlibrary/User.java
+/home/eoghainmagee/libraries/com.workoutlibrary/src/main/java/com/workoutlibrary/models/workout/Workout.java
+/home/eoghainmagee/libraries/com.workoutlibrary/src/main/java/com/workoutlibrary/models/workout/WorkoutAnalyser.java
+/home/eoghainmagee/libraries/com.workoutlibrary/src/main/java/com/workoutlibrary/models/workout/sets/CardioSet.java
+/home/eoghainmagee/libraries/com.workoutlibrary/src/main/java/com/workoutlibrary/models/workout/sets/Exercise.java
+/home/eoghainmagee/libraries/com.workoutlibrary/src/main/java/com/workoutlibrary/models/workout/sets/ExerciseSet.java
+/home/eoghainmagee/libraries/com.workoutlibrary/src/main/java/com/workoutlibrary/models/workout/sets/ExerciseSetValidation.java
+/home/eoghainmagee/libraries/com.workoutlibrary/src/main/java/com/workoutlibrary/models/workout/sets/StrengthEstimator.java
+/home/eoghainmagee/libraries/com.workoutlibrary/src/main/java/com/workoutlibrary/models/workout/sets/WeightSet.java
+/home/eoghainmagee/libraries/com.workoutlibrary/src/main/java/com/workoutlibrary/weightconversion/Weight.java
+/home/eoghainmagee/libraries/com.workoutlibrary/src/main/java/com/workoutlibrary/weightconversion/WeightMetrics.java

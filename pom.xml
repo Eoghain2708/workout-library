@@ -1,0 +1,35 @@
+<project xmlns="https://maven.apache.org/POM/4.0.0" xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http:s//maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>io.github.Eoghain2708</groupId>
+  <artifactId>workout-library</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <name>workout-library</name>
+  <description>Workout-tracking application API</description>
+  
+    <dependencies>
+    <dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter-api</artifactId>
+    <version>5.10.0</version>
+    <scope>test</scope>
+</dependency>
+    </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>21</release>
+        </configuration>
+      </plugin>
+      <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>3.2.5</version>
+</plugin>
+    </plugins>
+
+
+  </build>
+</project>

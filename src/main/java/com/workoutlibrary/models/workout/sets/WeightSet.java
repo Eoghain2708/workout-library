@@ -2,7 +2,6 @@ package com.workoutlibrary.models.workout.sets;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 import com.workoutlibrary.weightconversion.Weight;
 
@@ -171,10 +170,6 @@ public final class WeightSet extends ExerciseSet {
 	public double predictOneRepMax() {
 		return StrengthEstimator.predictOneRepMax(this);
 	}
-	
-	
-	
-	
 	
 	
 }

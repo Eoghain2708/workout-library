@@ -1,7 +1,6 @@
 package com.workoutlibrary.models.workout.sets;
 
 import java.util.HashMap;
-
 import java.util.Map;
 import java.util.Objects;
 
