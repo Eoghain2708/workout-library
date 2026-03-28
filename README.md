@@ -1,6 +1,6 @@
 # workout-library 
 
-**workout-library** is a small library that hopes to make building workout-tracking apps easier by providing core logic for cardio and weight-lifting style workouts and a shorthand methods which provide
+**workout-library** is a small library that hopes to make building workout-tracking apps easier by providing core logic for cardio and weight-lifting style workouts and shorthand methods which provide
 the user with useful information regarding their performance and potential. This library is a work in progress and, while its core is unlikely to change, will hopefully continue to expand in terms of options
 and utility.
 
