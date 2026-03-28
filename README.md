@@ -83,11 +83,11 @@ pass that in instead.
 
 ***
 #### User
-User only serves one purpose in this library, and that is to have a bodyweight. At current, the only use for the User object is that its weight be passed into exercises if chosen.
+User only serves one purpose in this library, and that is to have a bodyweight. At current, the only use for this bodyweight attribute is that it be passed into exercises if chosen.
 ```
 User user = User.ofBodyWeight(Weight.ofKg(80));
 WeightSet ws = new WeightSet.Builder()
-              .exercise(Exercise.create("barbell curl")
+              .exercise(Exercise.create("pushup")
               .reps(12)
               .weight(user.getBodyWeight())
               .build();
@@ -118,11 +118,11 @@ Epley's formula:
 Brzycki's formula:
 **1RM = weight * 36 / (37 - reps)**
 
-Epley is cited as being optimistic over certain repitition amounts, whereas Brzycki is cited as conservative - I thought it pertinent to average them to get a happy medium, although this may be split into individual methods depending on 
+Epley is cited as being optimistic over certain repetition amounts, whereas Brzycki is cited as conservative - I thought it pertinent to average them to get a happy medium, although this may be split into individual methods depending on 
 the client's/user's preferences.
 ***
 **getWeightFromOneRepMax()** <br>
-This method takes a weight parameter and a target reps parameter. The *weight* is said to be the user's one rep maximum for an unspecified exercise, and the *target reps* is how many repititions they want to aim for in a given set. Different 
-rep-ranges are preferred for different goals and this method aims to find the weight which would make *n* number of reps challenging, so that the user will achieve sufficient intensity in their desired rep-range. It used another Epley formula:
-** Weight = 1RM / (1 + 0.03333 * targetRepititions)
+This method takes a weight parameter and a target reps parameter. The *weight* is said to be the user's one rep maximum for an unspecified exercise, and the *target reps* is how many repetitions they want to aim for in a given set. Different 
+rep-ranges are preferred for different goals and this method aims to find the weight which would make *n* number of reps challenging, so that the user will achieve sufficient intensity in their desired rep-range. It uses another Epley formula:
+** Weight = 1RM / (1 + 0.03333 * targetRepititions)**
 
