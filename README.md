@@ -74,7 +74,7 @@ Weight is an object which can be left at 0 in order to simulate bodyweight exerc
 between unassigned (null) and a very difficult set, or one-rep maximum (0 RIR). WeightSets follow the same, predictable Builder pattern as CardioSets. Here is one in its full form.
 ```
 WeightSet ws = new WeightSet.Builder()
-              .exercise(Exercise.create("barbell curl")
+              .exercise(Exercise.create("barbell curl"))
               .reps(12)
               .weight(Weight.ofKg(15))
               .build();
@@ -101,7 +101,7 @@ User only serves one purpose in this library, and that is to have a bodyweight. 
 ```
 User user = User.ofBodyWeight(Weight.ofKg(80));
 WeightSet ws = new WeightSet.Builder()
-              .exercise(Exercise.create("pushup")
+              .exercise(Exercise.create("pushup"))
               .reps(12)
               .weight(user.getBodyWeight())
               .build();
@@ -118,9 +118,9 @@ double oneRepMax = predictOneRepMax(8, 100); // predict one rep max from a set o
 The class method is protected in the StrengthEstimator class, and takes in a WeightSet object. It is called in the WeightSet class, with the parameter being *this*, meaning it can be called in the following way:
 ```
 WeightSet ws = new WeightSet.Builder()
-              .exercise(Exercise.create("barbell curl")
+              .exercise(Exercise.create("barbell curl"))
               .reps(12)
-              .weight(Weight.ofKg(15)
+              .weight(Weight.ofKg(15))
               .build();
 double oneRepMax = ws.predictOneRepMax();
 ```
@@ -145,13 +145,13 @@ Workouts are objects that take a List of either type of ExerciseSet, or both. Th
 A Workout can be created with the *of()* method:
 ```
 WeightSet ws = new WeightSet.Builder()
-              .exercise(Exercise.create("barbell curl")
+              .exercise(Exercise.create("barbell curl"))
               .reps(12)
-              .weight(Weight.ofKg(15)
+              .weight(Weight.ofKg(15))
               .build();
 
 WeightSet ws2 = new WeightSet.Builder()
-              .exercise(Exercise.create("pushup")
+              .exercise(Exercise.create("pushup"))
               .reps(12)
               .weight(user.getBodyWeight())
               .build();
